@@ -1,0 +1,11 @@
+-- NUMBER OF MATCHES PLAYED PER YEAR
+select 
+  season as "YEARS", 
+  count(*) as "NUMBER OF MATCHES PLAYED IN YEAR" 
+from 
+  matches_file_data 
+group by 
+  season 
+order by 
+  season;
+

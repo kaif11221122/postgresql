@@ -1,0 +1,23 @@
+-- TOP 10 ECONOMICAL BOWLERS IN YEAR 2015
+select 
+  bowler as "BOWLER NAME", 
+  round(
+    cast(
+      sum(total_runs) as numeric
+    ) / cast(
+      count(distinct over) as numeric
+    ), 
+    2
+  ) as "ECONOMY OF THE BOWLER" 
+from 
+  matches_file_data 
+  inner join deliveries_file_data on matches_file_data.id = deliveries_file_data.match_id 
+where 
+  matches_file_data.season = 2015 
+group by 
+  bowler 
+order by 
+  "ECONOMY OF THE BOWLER" 
+limit 
+  10;
+

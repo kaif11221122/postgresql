@@ -1,0 +1,97 @@
+-- BASIC SOLUTION
+select 
+  season "YEAR", 
+  winner as "TEAM NAME", 
+  count(*) as "TOTAL NUMBER OF MATCHES WON" 
+from 
+  matches_file_data 
+where 
+  winner != 'null' 
+group by 
+  season, 
+  winner 
+order by 
+  season, 
+  winner;
+-- SOLUTION IN PROPER TABULAR FORMAT
+select 
+  winner as "TEAM NAME", 
+  sum(
+    coalesce(
+      case when season = 2008 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2008", 
+  sum(
+    coalesce(
+      case when season = 2009 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2009", 
+  sum(
+    coalesce(
+      case when season = 2010 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2010", 
+  sum(
+    coalesce(
+      case when season = 2011 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2011", 
+  sum(
+    coalesce(
+      case when season = 2012 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2012", 
+  sum(
+    coalesce(
+      case when season = 2013 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2013", 
+  sum(
+    coalesce(
+      case when season = 2014 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2014", 
+  sum(
+    coalesce(
+      case when season = 2015 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2015", 
+  sum(
+    coalesce(
+      case when season = 2016 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2016", 
+  sum(
+    coalesce(
+      case when season = 2017 then total_number_of_matches_won end, 
+      0
+    )
+  ) as "2017" 
+from 
+  (
+    select 
+      winner, 
+      season, 
+      count(*) as total_number_of_matches_won 
+    from 
+      matches_file_data 
+    group by 
+      season, 
+      winner
+  ) as number_of_matches_won_table 
+where 
+  winner != 'null' 
+group by 
+  winner 
+order by 
+  winner;
+

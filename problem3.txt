@@ -1,0 +1,14 @@
+-- SUM OF TOTAL EXTRA RUNS GIVEN BY EACH TEAM FOR YEAR 2016
+select 
+  batting_team as "BATTING TEAM", 
+  sum(extra_runs) as "TOTAL EXTRA RUNS GIVEN BY TEAM" 
+from 
+  matches_file_data 
+  inner join deliveries_file_data on matches_file_data.id = deliveries_file_data.match_id 
+where 
+  season = 2016 
+group by 
+  batting_team 
+order by 
+  "TOTAL EXTRA RUNS GIVEN BY TEAM" desc;
+
