@@ -1,0 +1,53 @@
+-- CREATING TABLES AND FETCHINIG THE DATA FROM RESPECTIVE CSV FILES
+create table if not exists matches_file_data(
+  id int, 
+  season int, 
+  city varchar, 
+  date date, 
+  team1 varchar, 
+  team2 varchar, 
+  toss_winner varchar, 
+  toss_decision varchar, 
+  result varchar, 
+  dl_applied int, 
+  winner varchar, 
+  win_by_runs int, 
+  win_by_wickets int, 
+  player_of_match varchar, 
+  venue varchar, 
+  umpire1 varchar, 
+  umpire2 varchar, 
+  umpire3 varchar, 
+  primary key (id)
+);
+create table if not exists deliveries_file_data(
+  match_id int, 
+  inning int, 
+  batting_team varchar, 
+  bowling_team varchar, 
+  over int, 
+  ball int, 
+  batsman varchar, 
+  non_striker varchar, 
+  bowler varchar, 
+  is_super_over int, 
+  wide_runs int, 
+  bye_runs int, 
+  legbye_runs int, 
+  noball_runs int, 
+  penalty_runs int, 
+  batsman_runs int, 
+  extra_runs int, 
+  total_runs int, 
+  player_dismissed varchar, 
+  dismissal_kind varchar, 
+  fielder varchar, 
+  FOREIGN key (match_id) REFERENCES matches_file_data(id)
+);
+copy matches_file_data 
+from 
+  '/home/hp/Desktop/MOUNTBLUE/SQL/matches.csv' with csv header;
+copy deliveries_file_data 
+from 
+  '/home/hp/Desktop/MOUNTBLUE/SQL/deliveries.csv' with csv header;
+
